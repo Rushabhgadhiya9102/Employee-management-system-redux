@@ -17,4 +17,4 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const { toggleSidebar, setSidebarOpen } = SidebarSlice.actions;
 
-export const sidebarReducer = SidebarSlice.reducer;
+export default SidebarSlice.reducer;

@@ -9,7 +9,7 @@ const initialState = storedUser || {
 
 }
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
 
     name: 'Authentication',
     initialState,
@@ -42,4 +42,4 @@ export const authSlice = createSlice({
 })
 
 export const {loginUser, logoutUser} = authSlice.actions
-export const authReducer =  authSlice.reducer;
+export default  authSlice.reducer;

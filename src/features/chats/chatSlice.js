@@ -28,4 +28,4 @@ const chatSlice = createSlice({
 });
 
 export const { addMessage } = chatSlice.actions;
-export const chatReducer = chatSlice.reducer;
+export default chatSlice.reducer;

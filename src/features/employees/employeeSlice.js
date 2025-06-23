@@ -17,7 +17,7 @@ const initialState = {
 
 // --------------- employee Slice ----------------
 
-export const employeeSlice = createSlice({
+ const employeeSlice = createSlice({
   name: "employee",
   initialState,
   reducers: {

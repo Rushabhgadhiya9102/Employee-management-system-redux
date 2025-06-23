@@ -22,4 +22,4 @@ const salarySlipSlice = createSlice({
 });
 
 export const { generateSlip , resetSalarySlip } = salarySlipSlice.actions;
-export const salarySlipReducer = salarySlipSlice.reducer;
+export default salarySlipSlice.reducer;
