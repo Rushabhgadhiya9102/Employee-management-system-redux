@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Information Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .primary-color {
+            color: #3b82f6;
+        }
+        
+        .primary-bg {
+            background-color: #3b82f6;
+        }
+        
+        .primary-border {
+            border-color: #3b82f6;
+        }
+        
+        .smooth-transition {
+            transition: all 0.3s ease;
+        }
+        
+        textarea:focus, input:focus, select:focus {
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">Employee Information Form</h1>
+        
+        <form class="space-y-6">
+            <!-- Personal Details Section -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <h2 class="text-xl font-semibold mb-4 primary-color border-b pb-2">Personal Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input type="text" id="fullName" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Enter full name">
+                    </div>
+                    <div>
+                        <label for="employeeId" class="block text-sm font-medium text-gray-700 mb-1">Employee ID</label>
+                        <input type="text" id="employeeId" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Enter ID">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" id="email" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Enter email">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <input type="tel" id="phone" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Enter phone">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Career Details Section -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <h2 class="text-xl font-semibold mb-4 primary-color border-b pb-2">Career Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="position" class="block text-sm font-medium text-gray-700 mb-1">Position</label>
+                        <input type="text" id="position" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Enter position">
+                    </div>
+                    <div>
+                        <label for="department" class="block text-sm font-medium text-gray-700 mb-1">Department</label>
+                        <select id="department" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <option value="">Select department</option>
+                            <option value="hr">Human Resources</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="finance">Finance</option>
+                            <option value="operations">Operations</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="experience" class="block text-sm font-medium text-gray-700 mb-1">Experience (years)</label>
+                        <input type="number" min="0" max="50" id="experience" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="0">
+                    </div>
+                    <div>
+                        <label for="joiningDate" class="block text-sm font-medium text-gray-700 mb-1">Joining Date</label>
+                        <input type="date" id="joiningDate" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service Timings Section -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <h2 class="text-xl font-semibold mb-4 primary-color border-b pb-2">Service Timings</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="shiftStart" class="block text-sm font-medium text-gray-700 mb-1">Shift Start Time</label>
+                        <input type="time" id="shiftStart" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="shiftEnd" class="block text-sm font-medium text-gray-700 mb-1">Shift End Time</label>
+                        <input type="time" id="shiftEnd" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox text-blue-600 rounded focus:ring-blue-500">
+                        <span class="ml-2 text-sm text-gray-700">Flexible working hours</span>
+                    </label>
+                </div>
+                <div class="mt-2">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox text-blue-600 rounded focus:ring-blue-500">
+                        <span class="ml-2 text-sm text-gray-700">Remote work available</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Earnings Section -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <h2 class="text-xl font-semibold mb-4 primary-color border-b pb-2">Earnings</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="basicSalary" class="block text-sm font-medium text-gray-700 mb-1">Basic Salary</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">₹</div>
+                            <input type="number" min="15000" max="75000" id="basicSalary" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="0.0">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="hra" class="block text-sm font-medium text-gray-700 mb-1">HRA</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">₹</div>
+                                <input type="number" min="8000" max="15000" id="hra" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="0.0">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="da" class="block text-sm font-medium text-gray-700 mb-1">DA</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">₹</div>
+                                <input type="number" min="20000" max="35000" id="da" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="0.0">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="ta" class="block text-sm font-medium text-gray-700 mb-1">TA</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">₹</div>
+                                <input type="number" min="800" max="3200" id="ta" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="0.0">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="bonus" class="block text-sm font-medium text-gray-700 mb-1">Bonus</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">₹</div>
+                                <input type="number" min="4000" max="16000" id="bonus" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="0.0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Employee Description Section -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <h2 class="text-xl font-semibold mb-4 primary-color border-b pb-2">Employee Description</h2>
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Professional Summary</label>
+                    <textarea id="description" rows="5" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Describe the employee's role, skills, and responsibilities..."></textarea>
+                </div>
+                <div class="mt-4">
+                    <label for="skills" class="block text-sm font-medium text-gray-700 mb-1">Key Skills</label>
+                    <input type="text" id="skills" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Add skills separated by commas">
+                </div>
+                <div class="mt-4">
+                    <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
+                    <textarea id="notes" rows="3" class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Any other relevant information..."></textarea>
+                </div>
+            </div>
+            
+            <!-- Form Actions -->
+            <div class="flex justify-end space-x-3">
+                <button type="button" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 smooth-transition">Cancel</button>
+                <button type="submit" class="px-4 py-2 primary-bg rounded-lg text-white hover:bg-blue-600 smooth-transition">Save Employee</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+

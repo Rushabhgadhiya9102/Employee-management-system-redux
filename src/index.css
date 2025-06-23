@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.login-form{
+    background-image: url('./assets/loginbg.jpeg');
+}
+
+.scrollbar-none {
+    scrollbar-width: none;
+}
