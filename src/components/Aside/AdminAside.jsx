@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { TbLogout2 } from "react-icons/tb";
 import { toggleSidebar } from "../../features/sidebar/sidebarSlice";
-import { logoutUser } from "../../features/auth/authSLice";
+import { logoutUser } from "../../features/auth/authSlice";
 import { BsFillPersonPlusFill } from "react-icons/bs";
 
 const AdminAside = () => {
