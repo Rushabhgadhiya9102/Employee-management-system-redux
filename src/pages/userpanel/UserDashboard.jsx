@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { logoutUser } from '../../features/auth/authSLice'
+import { logoutUser } from '../../features/auth/authSlice'
 
 const UserDashboard = () => {
 
