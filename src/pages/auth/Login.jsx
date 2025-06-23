@@ -3,7 +3,7 @@ import { BiLogIn } from "react-icons/bi";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../features/auth/authSLice";
+import { loginUser } from "../../features/auth/authSlice";
 
 const Login = () => {
 
