@@ -1,0 +1,129 @@
+// src/App.js
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addSalarySlip } from './store/salarySlice';
+import { jsPDF } from 'jspdf';
+import Papa from 'papaparse';
+import './App.css';
+
+const App = () => {
+    const dispatch = useDispatch();
+    const salarySlips = useSelector((state) => state.salary.salarySlips);
+    const departments = useSelector((state) => state.salary.departments);
+    const salaries = useSelector((state) => state.salary.salaries);
+
+    const [employeeName, setEmployeeName] = useState('');
+    const [month, setMonth] = useState('');
+    const [year, setYear] = useState('');
+    const [modalData, setModalData] = useState(null);
+
+    const handleGenerateSlip = () => {
+        if (employeeName && month && year) {
+            dispatch(addSalarySlip({ employeeName, month, year }));
+            setEmployeeName('');
+            setMonth('');
+            setYear('');
+        } else {
+            alert('Please fill in all fields.');
+        }
+    };
+
+    const handleViewSlip = (slip) => {
+        setModalData(slip);
+    };
+
+    const handleCloseModal = () => {
+        setModalData(null);
+    };
+
+    const generatePDF = () => {
+        const doc = new jsPDF();
+        const salaryInfo = salaries[modalData.employeeName];
+        const total = salaryInfo.basic + salaryInfo.housing + salaryInfo.transport + salaryInfo.bonus;
+
+        doc.text('Salary Slip', 105, 20, { align: 'center' });
+        doc.text(`Employee: ${modalData.employeeName}`, 20, 40);
+        doc.text(`Department: ${departments[modalData.employeeName]}`, 20, 50);
+        doc.text(`Month: ${modalData.month}`, 20, 60);
+        doc.text(`Year: ${modalData.year}`, 20, 70);
+        doc.text(`Total Salary: $${total.toFixed(2)}`, 20, 80);
+        doc.save(`Salary_Slip_${modalData.employeeName}_${modalData.month}_${modalData.year}.pdf`);
+    };
+
+    const generateCSV = () => {
+        const salaryInfo = salaries[modalData.employeeName];
+        const total = salaryInfo.basic + salaryInfo.housing + salaryInfo.transport + salaryInfo.bonus;
+
+        const data = {
+            'Employee Name': modalData.employeeName,
+            'Department': departments[modalData.employeeName],
+            'Month': modalData.month,
+            'Year': modalData.year,
+            'Total Salary': `$${total.toFixed(2)}`
+        };
+
+        const csv = Papa.unparse([data]);
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', `Salary_Slip_${modalData.employeeName}_${modalData.month}_${modalData.year}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    return (
+        <div className="container mx-auto p-4">
+            <h1 className="text-3xl font-bold text-center mb-4">Salary Slip Generator</h1>
+            <div className="bg-white p-6 rounded-lg shadow-md mb-4">
+                <h2 className="text-xl font-semibold mb-4">Generate Salary Slip</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <select value={employeeName} onChange={(e) => setEmployeeName(e.target.value)} className="border rounded p-2">
+                        <option value="">Select Employee</option>
+                        {Object.keys(departments).map((name) => (
+                            <option key={name} value={name}>{name}</option>
+                        ))}
+                    </select>
+                    <select value={month} onChange={(e) => setMonth(e.target.value)} className="border rounded p-2">
+                        <option value="">Select Month</option>
+                        {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((m) => (
+                            <option key={m} value={m}>{m}</option>
+                        ))}
+                    </select>
+                    <input type="number" value={year} onChange={(e) => setYear(e.target.value)} placeholder="Year" className="border rounded p-2" />
+                </div>
+                <button onClick={handleGenerateSlip} className="mt-4 bg-blue-600 text-white p-2 rounded">Generate Salary Slip</button>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+                <h2 className="text-xl font-semibold mb-4">Generated Salary Slips</h2>
+                <ul>
+                    {salarySlips.map((slip, index) => (
+                        <li key={index} className="flex justify-between items-center border-b py-2">
+                            <span>{slip.employeeName} - {slip.month} {slip.year}</span>
+                            <button onClick={() => handleViewSlip(slip)} className="text-blue-600">View</button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            {modalData && (
+                <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75">
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <h3 className="text-lg font-semibold">Salary Slip Details</h3>
+                        <p>Employee: {modalData.employeeName}</p>
+                        <p>Department: {departments[modalData.employeeName]}</p>
+                        <p>Month: {modalData.month}</p>
+                        <p>Year: {modalData.year}</p>
+                        <button onClick={generatePDF} className="mt-4 bg-blue-600 text-white p-2 rounded">Download PDF</button>
+                        <button onClick={generateCSV} className="mt-2 bg-green-600 text-white p-2 rounded">Download CSV</button>
+                        <button onClick={handleCloseModal} className="mt-2 bg-red-600 text-white p-2 rounded">Close</button>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default App;

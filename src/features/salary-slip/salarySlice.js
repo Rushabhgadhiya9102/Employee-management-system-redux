@@ -1,25 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-// ------------- intial state -------------
+// ---------------- local storage ------------------
+
+const getLocalStorage = JSON.parse(localStorage.getItem('salarySlip'))
+
+const setLocalStorage = (salarySlip) =>{
+   localStorage.setItem('salarySlip', JSON.stringify(salarySlip))
+  }
+
+
+// ------------- initail state -------------
 
 const initialState = {
-    salarySlips: []
-};
+    salaryArr : getLocalStorage || []
+}
 
-// ------------ slice reducer -------------
+const salarySlice = createSlice({
+    name:'salary',
+    initialState,
+    reducers:{
+        addSalary:(state,action)=>{
+            state.salaryArr.push(action.payload)
+            setLocalStorage(state.salaryArr)
+        },
 
-const salarySlipSlice = createSlice({
-  name: 'salarySlip',
-  initialState,
-  reducers: {
+        deleteSalary : (state,action) =>{
+            state.salaryArr = state.salaryArr.filter(item => item.id !== action.payload)
+            setLocalStorage(state.salaryArr)
+        }
+        
+    }
+})
 
-    generateSlip : (state, action) =>{
-        state.salarySlips.push(action.payload);
-    },
-
-    resetSalarySlip: () => initialState
-  },
-});
-
-export const { generateSlip , resetSalarySlip } = salarySlipSlice.actions;
-export default salarySlipSlice.reducer;
+export const {addSalary, deleteSalary} = salarySlice.actions
+export default salarySlice.reducer;

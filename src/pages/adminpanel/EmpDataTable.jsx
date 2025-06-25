@@ -37,7 +37,7 @@ const downloadCSV = (array) => {
 const Export = ({ onExport }) => (
   <button
     onClick={onExport}
-    className="text-lg bg-blue-500 hover:bg-blue-400 duration-300 cursor-pointer text-white p-3 rounded-md"
+    className="text-2xl p-1.5 text-blue-500 hover:bg-blue-100 cursor-pointer rounded-xl"
   >
     <FaDownload />
   </button>
@@ -108,7 +108,7 @@ const columns = [
       selector: (row) => (
         <>
           <button
-            className="bg-yellow-500 hover:bg-yellow-400 p-2 rounded cursor-pointer text-white"
+            className="p-1.5 text-indigo-500 hover:bg-indigo-100 rounded-lg cursor-pointer"
             onClick={() => handleEdit(row.id)}
           >
             <HiMiniPencilSquare size={20} />
@@ -139,14 +139,14 @@ const columns = [
 
   return (
     <>
-      <section className="flex gap-x-3 w-full h-full">
+      <section className="flex gap-x-6 w-full h-full">
         <AdminAside />
 
-        <div className="Dashboard-content bg-white rounded-2xl w-full h-full p-5 overflow-y-scroll">
+        <div className="Table-content bg-white rounded-2xl w-full h-full p-5 overflow-y-scroll">
           <Header />
 
-          <h1 className="text-5xl font-bold text-center mt-10">
-            Admin Dashboard
+          <h1 className="text-5xl font-bold text-indigo-600 text-center my-5">
+            Employee Data
           </h1>
 
           <div className="grid grid-cols-1">
@@ -155,7 +155,7 @@ const columns = [
                 columns={columns}
                 data={employees}
                 customStyles={customStyle}
-                title="Employee Data"
+                // title="Employee Data"
                 pagination
                 selectableRows
                 highlightOnHover
@@ -168,7 +168,7 @@ const columns = [
                 }}
               />
 
-              <button className='bg-red-500 hover:bg-red-400 text-white p-3 rounded cursor-pointer'
+              <button className='p-1.5 text-xl text-red-500 hover:bg-red-100 rounded-lg cursor-pointer'
               onClick={()=>{
                 selectedRow.map((row) => handleDelete(row.id))
                 selectedRow('')

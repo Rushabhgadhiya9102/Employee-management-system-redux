@@ -54,10 +54,10 @@ const Modal = () => {
   return (
     <>
       <div className="fixed inset-0 z-50 bg-[#8080808c] bg-opacity-40 flex justify-center items-center">
-        <div className="bg-white rounded-2xl p-6 w-full max-w-7xl max-h-170 overflow-y-scroll shadow-lg relative">
+        <div className="bg-[#f5f5fa] rounded-2xl p-6 w-full max-w-7xl max-h-170 overflow-y-scroll scrollbar-none shadow-lg relative">
           {/* ---------------------- employee details ------------------ */}
 
-          <div className="bg-slate-100 p-6 rounded-xl">
+          <div className="p-6 rounded-3xl">
             {/* ----------------- haeder -------------------- */}
 
             <div className="flex items-center justify-between py-3 border-b mb-3">
@@ -76,10 +76,10 @@ const Modal = () => {
             <div className="">
               {/* ------------- personal information ------------*/}
 
-              <div className="profile-header bg-blue-500 text-white p-6 rounded-2xl">
+              <div className="profile-header bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-3xl">
                 <div className="container mx-auto">
                   <div className="flex flex-col md:flex-row items-center">
-                    <div className="w-32 h-32 rounded-full bg-white shadow-lg overflow-hidden border-4 border-white mb-4 md:mb-0 md:mr-6">
+                    <div className="w-32 h-32 rounded-full bg-white overflow-hidden border-4 border-white mb-4 md:mb-0 md:mr-6">
                       <IoPersonCircleOutline className=" me-3 text-gray-300 w-full h-full" />
                     </div>
                     <div className="flex-1 text-center md:text-left">
@@ -116,13 +116,13 @@ const Modal = () => {
               </div>
 
               {/* ----------------  --------------- */}
-              <div className="container mx-auto mt-3">
+              <div className="container mx-auto mt-6">
                 {/* -------------------- new grid section -------------------- */}
 
-                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-3">
-                  <div className="space-y-3">
+                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="space-y-6">
                     {/* ---------- performance stats card ---------- */}
-                    <div className="bg-white rounded-xl shadow-sm p-6">
+                    <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
                       <h2 className="text-xl flex items-center font-bold text-gray-800 mb-4">
                         <AiOutlineLineChart className="text-blue-500 mr-2" size={25} />
                         Performance Metrics
@@ -186,7 +186,7 @@ const Modal = () => {
                     </div>
 
                     {/* ---------------- Time Off Card ---------------- */}
-                    <div className="bg-white rounded-xl shadow-sm p-6">
+                    <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
                       <h2 className="text-xl flex items-center font-bold text-gray-800 mb-4">
                         <HiMiniCalendarDateRange className="mr-2 text-blue-500" size={25} />
                         Time Off Balance
@@ -213,7 +213,7 @@ const Modal = () => {
                     </div>
 
                     {/* --------------- working hours card ----------------- */}
-                    <div className="bg-white shadow-sm p-6 rounded-2xl">
+                    <div className="bg-white p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300">
                       <h3 className="text-xl font-bold text-gray-800 mb-4">
                         Work Schedule
                       </h3>
@@ -238,7 +238,7 @@ const Modal = () => {
                   </div>
 
                   {/* ----------------- Compensation Card ----------------- */}
-                  <div className="bg-white rounded-xl shadow-sm p-6">
+                  <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
                     <h2 className="text-xl font-bold flex items-center text-gray-800 mb-4">
                       <FaMoneyBillWave className="text-blue-500 mr-2" />
                       Compensation
@@ -346,7 +346,7 @@ const Modal = () => {
                   </div>
 
                   {/* --------------- Skills & Qualifications Card ----------------- */}
-                  <div className="bg-white rounded-xl shadow-sm p-6 col-span-1 md:col-span-2 lg:col-span-2">
+                  <div className="bg-white rounded-3xl p-6 col-span-1 md:col-span-2 lg:col-span-2 shadow-lg hover:shadow-xl transition-all duration-300">
                     <h2 className="text-xl font-bold flex items-center text-gray-800 mb-4">
                       <FaTools className="text-blue-500 mr-2" size={20} />
                       Skills &amp; Qualifications

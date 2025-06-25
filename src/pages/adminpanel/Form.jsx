@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Form = () => {
-
   // ------------- States -------------
 
   const [employee, setEmployee] = useState({});
@@ -18,7 +17,7 @@ const Form = () => {
   // ------------- use effect -----------------
 
   useEffect(() => {
-    setEmployee({ ...editData});
+    setEmployee({ ...editData });
   }, [editData]);
 
   // ------------ handle change ---------------
@@ -34,17 +33,16 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(employee.id){
-      dispatch(updateUser(employee))
-      toast.info("Update Sucessfull")
-    }else{
-      dispatch(createUser({...employee, id:Date.now()}))
+    if (employee.id) {
+      dispatch(updateUser(employee));
+      toast.info("Update Sucessfull");
+    } else {
+      dispatch(createUser({ ...employee, id: Date.now() }));
       toast.success("Item Add");
     }
     setEmployee({});
 
-    
-    navigate('/EmpDataTable')
+    navigate("/EmpDataTable");
     console.log(employee);
   };
 
@@ -70,23 +68,19 @@ const Form = () => {
 
   return (
     <>
-      <section className="flex gap-x-3 w-full h-full">
+      <section className="flex gap-x-6 w-full h-full">
         <AdminAside />
 
-        <div className="Dashboard-content bg-white rounded-2xl w-full h-full p-5 overflow-y-scroll">
+        <div className="form-content bg-[#f5f5fa] rounded-2xl w-full h-full p-5 overflow-y-scroll scrollbar-none">
           <Header />
-          <h1 className="text-5xl font-bold text-center my-10">
-            Admin Dashboard
-          </h1>
 
           <div className="form-section">
             <form method="post" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5">
-
                 {/* -------------- personal information -------------- */}
 
                 <div className="form-item">
-                  <div className="bg-slate-100 p-6 rounded-xl h-full">
+                  <div className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 p-6 rounded-3xl h-full">
                     <h2 className="text-xl font-semibold mb-4 text-primary border-b pb-2">
                       Personal Information
                     </h2>
@@ -104,7 +98,7 @@ const Form = () => {
                           name="employeeName"
                           value={employee.employeeName || ""}
                           onChange={handleChange}
-                          className="w-full bg-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                           placeholder="John Doe"
                         />
                       </div>
@@ -120,7 +114,7 @@ const Form = () => {
                           name="department"
                           value={employee.department || ""}
                           onChange={handleChange}
-                          className="w-full bg-white border-gray-300 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          className="w-full bg-gray-50 border-gray-300 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         >
                           <option disabled>Select Department</option>
                           <option value="hr">Human Resources</option>
@@ -137,7 +131,7 @@ const Form = () => {
                 {/* ----------- earnings information ----------- */}
 
                 <div className="form-item">
-                  <div className="bg-slate-100 p-6 rounded-xl">
+                  <div className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 p-6 rounded-3xl">
                     <h2 className="text-xl font-semibold mb-4 text-primary border-b pb-2">
                       Earnings
                     </h2>
@@ -161,7 +155,7 @@ const Form = () => {
                             name="employeeSalary"
                             value={employee.employeeSalary || ""}
                             onChange={handleChange}
-                            className="w-full bg-white border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                            className="w-full bg-gray-50 border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                             placeholder={0.0}
                           />
                         </div>
@@ -186,7 +180,7 @@ const Form = () => {
                               name="hra"
                               value={employee.hra || ""}
                               onChange={handleChange}
-                              className="w-full bg-white border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                              className="w-full bg-gray-50 border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                               placeholder={0.0}
                             />
                           </div>
@@ -210,7 +204,7 @@ const Form = () => {
                               name="da"
                               value={employee.da || ""}
                               onChange={handleChange}
-                              className="w-full bg-white border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                              className="w-full bg-gray-50 border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                               placeholder={0.0}
                             />
                           </div>
@@ -234,7 +228,7 @@ const Form = () => {
                               name="ta"
                               value={employee.ta || ""}
                               onChange={handleChange}
-                              className="w-full bg-white border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                              className="w-full bg-gray-50 border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                               placeholder={0.0}
                             />
                           </div>
@@ -258,7 +252,7 @@ const Form = () => {
                               name="bonus"
                               value={employee.bonus || ""}
                               onChange={handleChange}
-                              className="w-full bg-white border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                              className="w-full bg-gray-50 border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                               placeholder={0.0}
                             />
                           </div>
@@ -271,7 +265,7 @@ const Form = () => {
                 {/* ----------- deductions information ------------ */}
 
                 <div className="form-item">
-                  <div className="bg-slate-100 p-6 rounded-xl">
+                  <div className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 p-6 rounded-3xl">
                     <h2 className="text-xl font-semibold mb-4 text-primary border-b pb-2">
                       Deductions
                     </h2>
@@ -296,7 +290,7 @@ const Form = () => {
                               name="pf"
                               value={employee.pf || ""}
                               onChange={handleChange}
-                              className="w-full bg-white border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                              className="w-full bg-gray-50 border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                               placeholder={0.0}
                             />
                           </div>
@@ -320,7 +314,7 @@ const Form = () => {
                               name="pt"
                               value={employee.pt || ""}
                               onChange={handleChange}
-                              className="w-full bg-white border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                              className="w-full bg-gray-50 border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                               placeholder={0.0}
                             />
                           </div>
@@ -344,7 +338,7 @@ const Form = () => {
                               name="tax"
                               value={employee.tax || ""}
                               onChange={handleChange}
-                              className="w-full bg-white border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                              className="w-full bg-gray-50 border-gray-300 border rounded-lg px-4 py-2 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                               placeholder={0.0}
                             />
                           </div>
@@ -390,49 +384,49 @@ const Form = () => {
                 {/* ----------- services timing --------------- */}
 
                 <div className="form-item">
-                  <div className="bg-slate-100 rounded-xl h-full p-6">
+                  <div className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-3xl h-full p-6">
                     <h2 className="text-xl font-semibold mb-4 primary-color border-b pb-2">
                       Service Timings
                     </h2>
-                      <div>
-                        <label
-                          htmlFor="shiftStart"
-                          className="block text-sm font-medium mb-1"
-                        >
-                          Shift Start Time
-                        </label>
-                        <input
-                          type="time"
-                          id="shiftStart"
-                          name="shiftStart"
-                          onChange={handleChange}
-                          value={employee.shiftStart || ''}
-                          className="w-full mb-5 bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="shiftEnd"
-                          className="block text-sm font-medium mb-1"
-                        >
-                          Shift End Time
-                        </label>
-                        <input
-                          type="time"
-                          id="shiftEnd"
-                          name="shiftEnd"
-                          onChange={handleChange}
-                          value={employee.shiftEnd || ''}
-                          className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                        />
-                      </div>
+                    <div>
+                      <label
+                        htmlFor="shiftStart"
+                        className="block text-sm font-medium mb-1"
+                      >
+                        Shift Start Time
+                      </label>
+                      <input
+                        type="time"
+                        id="shiftStart"
+                        name="shiftStart"
+                        onChange={handleChange}
+                        value={employee.shiftStart || ""}
+                        className="w-full mb-5 bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="shiftEnd"
+                        className="block text-sm font-medium mb-1"
+                      >
+                        Shift End Time
+                      </label>
+                      <input
+                        type="time"
+                        id="shiftEnd"
+                        name="shiftEnd"
+                        onChange={handleChange}
+                        value={employee.shiftEnd || ""}
+                        className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      />
+                    </div>
                   </div>
                 </div>
 
                 {/* ------------ employee description  ------------ */}
 
                 <div className="form-item md:col-span-2 lg:col-span-2">
-                  <div className="bg-slate-100 rounded-xl shadow-sm p-6">
+                  <div className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-3xl p-6">
                     <h2 className="text-xl font-semibold mb-4 primary-color border-b pb-2">
                       Employee Description
                     </h2>
@@ -446,11 +440,11 @@ const Form = () => {
                       <textarea
                         id="description"
                         rows={5}
-                        className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         placeholder="Describe the employee's role, skills, and responsibilities..."
                         name="description"
                         onChange={handleChange}
-                        value={employee.description || ''}
+                        value={employee.description || ""}
                       />
                     </div>
                     <div className="mt-4">
@@ -463,11 +457,11 @@ const Form = () => {
                       <input
                         type="text"
                         id="skills"
-                        className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         placeholder="Add skills separated by commas"
                         name="skills"
                         onChange={handleChange}
-                        value={employee.skills || ''}
+                        value={employee.skills || ""}
                       />
                     </div>
                     <div className="mt-4">
@@ -480,18 +474,18 @@ const Form = () => {
                       <textarea
                         id="notes"
                         rows={3}
-                        className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         placeholder="Any other relevant information..."
                         name="notes"
                         onChange={handleChange}
-                        value={employee.notes || ''}
+                        value={employee.notes || ""}
                       />
                     </div>
                   </div>
                 </div>
               </div>
 
-              <button className="bg-blue-500 hover:bg-blue-400 text-white py-2 px-10 mt-5 rounded-lg font-bold cursor-pointer">
+              <button className="bg-indigo-600 hover:bg-indigo-700 transition-colors text-white py-2 px-10 mt-5 rounded-lg cursor-pointer">
                 Submit
               </button>
             </form>

@@ -5,7 +5,8 @@ import employeeReducer from "../features/employees/employeeSlice";
 import modalReducer from "../features/modal/modalSlice";
 import taskReducer from "../features/tasks/tasksSlice";
 import chatReducer from "../features/chats/chatSlice";
-import salarySlipReducer from "../features/salary-slip/salarySlice";
+import salaryReducer from "../features/salary-slip/salarySlice"
+import salaryModalReducer from "../features/modal/salaryModalSlice"
 
 const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ const store = configureStore({
     modal: modalReducer,
     tasks: taskReducer,
     chat: chatReducer,
-    salarySlip: salarySlipReducer,
+    salarySlips: salaryReducer,
+    salaryModal: salaryModalReducer
   },
 });
 
