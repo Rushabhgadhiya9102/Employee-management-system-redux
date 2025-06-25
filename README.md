@@ -2,6 +2,9 @@
 
 This is a React-based Employee Management System that allows administrators to manage employee data, assign tasks, communicate via chat, and view employee details. It uses Redux Toolkit for state management and React Router for navigation.
 
+## Live Demo: 
+   [View Application](https://employee-management-system-redux-pm.vercel.app/)
+
 ## Features
 
 **Admin Panel:**
