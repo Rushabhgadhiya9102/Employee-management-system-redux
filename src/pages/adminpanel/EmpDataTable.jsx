@@ -135,6 +135,19 @@ const columns = [
         fontSize:"14px"
       },
     },
+     rows: {
+      style: {
+        '&:nth-of-type(odd)': {
+          backgroundColor: '#f2f2f2',
+        },
+        '&:nth-of-type(even)': {
+          backgroundColor: 'white', 
+        },
+        '&:hover': {
+          backgroundColor: '#ddd', 
+        },
+      },
+    },
   };
 
   return (
@@ -142,14 +155,10 @@ const columns = [
       <section className="flex gap-x-6 w-full h-full">
         <AdminAside />
 
-        <div className="Table-content bg-white rounded-2xl w-full h-full p-5 overflow-y-scroll">
+        <div className="Table-content bg-[#f5f5fa] rounded-2xl w-full h-full p-5 overflow-y-scroll">
           <Header />
 
-          <h1 className="text-5xl font-bold text-indigo-600 text-center my-5">
-            Employee Data
-          </h1>
-
-          <div className="grid grid-cols-1">
+          <div className="grid grid-cols-1 shadow-lg bg-white p-3 rounded-3xl">
             <div className="datatable-section relative">
                 <DataTable
                 columns={columns}

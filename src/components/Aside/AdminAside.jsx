@@ -58,7 +58,7 @@ const AdminAside = () => {
     <>
       <aside
         className={`bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-xl relative duration-300 ${
-          !open ? "w-72 p-10" : "w-15 py-14 px-4"
+          !open ? "w-72 p-10 sm:h-full lg:h-full" : "w-15 py-14 px-4 sm:h-0 lg:h-full"
         } `}
       >
         <div className="container">

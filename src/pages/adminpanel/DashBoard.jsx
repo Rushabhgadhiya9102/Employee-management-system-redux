@@ -39,20 +39,20 @@ const DashBaord = () => {
 
   // ------------------ employees performance ranking ----------------
 
-  useEffect(() => {
-    const rankingInterval = setInterval(() => {
-      const employeesWithRanking = employees.map((emp) => ({
-        ...emp,
-        ranking: Math.floor(Math.random() * 100) + 1,
-      }));
+  // useEffect(() => {
+  //   const rankingInterval = setInterval(() => {
+  //     const employeesWithRanking = employees.map((emp) => ({
+  //       ...emp,
+  //       ranking: Math.floor(Math.random() * 100) + 1,
+  //     }));
 
-      employeesWithRanking.sort((a, b) => b.ranking - a.ranking);
+  //     employeesWithRanking.sort((a, b) => b.ranking - a.ranking);
 
-      setRanking(employeesWithRanking);
-    }, 5000);
+  //     setRanking(employeesWithRanking);
+  //   }, 5000);
 
-    return () => clearInterval(rankingInterval);
-  }, []);
+  //   return () => clearInterval(rankingInterval);
+  // }, []);
 
   useEffect(() => {
     // ----------------- get current date and day -----------------

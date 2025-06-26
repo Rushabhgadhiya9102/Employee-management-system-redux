@@ -127,3 +127,205 @@ const App = () => {
 };
 
 export default App;
+
+
+import { useSelector, useDispatch } from "react-redux";
+import { closeSalaryModal } from "../../features/modal/salaryModalSlice";
+import { AnimatePresence, motion } from "framer-motion";
+import { FaCircleXmark } from "react-icons/fa6";
+import { jsPDF } from "jspdf";
+
+const SalaryModal = () => {
+  const dispatch = useDispatch();
+  const { isOpen, selectedEmployee } = useSelector((state) => state.salaryModal);
+  const salarySlips = useSelector((state) => state.salarySlips.salaryArr);
+
+  if (!isOpen || !selectedEmployee) return null;
+  
+  const employeeSlips = salarySlips.filter(
+    (slip) => slip.employeesSalarySlip === selectedEmployee.employeeName
+  );
+
+  // Handle case when there are no slips for the employee
+  if (employeeSlips.length === 0) {
+    return (
+      <p className="text-gray-500">
+        No salary slips found for {selectedEmployee.employeeName}.
+      </p>
+    );
+  }
+
+  // Current slip data (assuming we're showing the first match)
+  const currentSlip = employeeSlips[0];
+
+  // Calculations
+  const totalEarnings = (
+    (parseFloat(selectedEmployee.employeeSalary) || 0) +
+    (parseFloat(selectedEmployee.hra) || 0) +
+    (parseFloat(selectedEmployee.da) || 0) +
+    (parseFloat(selectedEmployee.ta) || 0) +
+    (parseFloat(selectedEmployee.bonus) || 0)
+  ).toFixed(2);
+
+  const totalDeductions = (
+    (parseFloat(selectedEmployee.tax) || 0) +
+    (parseFloat(selectedEmployee.pf) || 0) +
+    (parseFloat(selectedEmployee.pt) || 0)
+  ).toFixed(2);
+
+  const netSalary = (totalEarnings - totalDeductions).toFixed(2);
+
+  // ----- DOWNLOAD FUNCTIONS -----
+
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
+    
+    // Header
+    doc.setFontSize(18);
+    doc.text("SALARY SLIP", 105, 20, null, null, "center");
+    
+    // Employee Info
+    doc.setFontSize(12);
+    doc.text(`Employee Name: ${selectedEmployee.employeeName}`, 20, 40);
+    doc.text(`Department: ${selectedEmployee.department}`, 20, 50);
+    doc.text(`Month/Year: ${currentSlip.month} ${currentSlip.year}`, 20, 60);
+
+    // Earnings
+    doc.text("Earnings", 20, 80);
+    doc.text(`Basic Salary: $${selectedEmployee.employeeSalary}`, 30, 90);
+    doc.text(`HRA: $${selectedEmployee.hra}`, 30, 100);
+    doc.text(`DA: $${selectedEmployee.da}`, 30, 110);
+    doc.text(`TA: $${selectedEmployee.ta}`, 30, 120);
+    doc.text(`Bonus: $${selectedEmployee.bonus}`, 30, 130);
+    doc.text(`Total Earnings: $${totalEarnings}`, 20, 150);
+
+    // Deductions
+    doc.text("Deductions", 110, 80);
+    doc.text(`PF: $${selectedEmployee.pf}`, 120, 90);
+    doc.text(`PT: $${selectedEmployee.pt}`, 120, 100);
+    doc.text(`Tax: $${selectedEmployee.tax}`, 120, 110);
+    doc.text(`Total Deductions: $${totalDeductions}`, 110, 130);
+
+    // Net Pay
+    doc.setFontSize(14);
+    doc.text(`Net Pay: $${netSalary}`, 105, 160, null, null, "center");
+
+    doc.save(`${selectedEmployee.employeeName}_Salary_${currentSlip.month}_${currentSlip.year}.pdf`);
+  };
+
+  const handleDownloadCSV = () => {
+    // Create CSV content
+    const headers = [
+      "Employee Name",
+      "Department",
+      "Month", 
+      "Year",
+      "Basic Salary",
+      "HRA",
+      "DA",
+      "TA",
+      "Bonus",
+      "Total Earnings",
+      "PF",
+      "PT",
+      "Tax",
+      "Total Deductions",
+      "Net Pay"
+    ];
+
+    const data = [
+      selectedEmployee.employeeName,
+      selectedEmployee.department,
+      currentSlip.month,
+      currentSlip.year,
+      selectedEmployee.employeeSalary,
+      selectedEmployee.hra,
+      selectedEmployee.da,
+      selectedEmployee.ta,
+      selectedEmployee.bonus,
+      totalEarnings,
+      selectedEmployee.pf,
+      selectedEmployee.pt,
+      selectedEmployee.tax,
+      totalDeductions,
+      netSalary
+    ];
+
+    // Convert to CSV string
+    const csvContent = [
+      headers.join(','),
+      data.join(',')
+    ].join('\n');
+
+    // Create download link
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `${selectedEmployee.employeeName}_Salary_${currentSlip.month}_${currentSlip.year}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-[#8080808c] bg-opacity-50 flex justify-center items-center z-50">
+      <AnimatePresence>
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, scale: 0.8 },
+            visible: { opacity: 1, scale: 1 }
+          }}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          transition={{ duration: 0.3 }}
+          className="bg-white rounded-lg max-w-7xl max-h-[90vh] overflow-y-auto scrollbar-none relative"
+        >
+          <button
+            onClick={() => dispatch(closeSalaryModal())}
+            className="mt-3 mr-3 absolute top-0 right-0 z-10"
+          >
+            <FaCircleXmark size={30} className="text-gray-600 hover:text-red-500" />
+          </button>
+
+          {/* Salary Slip Content (same as before) */}
+          <div className="container mx-auto px-4 py-12">
+            <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+              {/* ... Rest of your salary slip UI ... */}
+              
+              {/* Footer with download buttons */}
+              <div className="p-6 border-t">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
+                  <div>
+                    <p>For any queries, contact HR Department</p>
+                    <p>Email: hr@company.com | Phone: (123) 456-7890</p>
+                  </div>
+                  <div className="flex gap-3">
+                    <button 
+                      onClick={handleDownloadPDF}
+                      className="flex items-center gap-1 px-3 py-1 border rounded-md hover:bg-blue-50 hover:text-blue-600 transition"
+                    >
+                      <i className="fas fa-download" /> PDF
+                    </button>
+                    <button 
+                      onClick={handleDownloadCSV}
+                      className="flex items-center gap-1 px-3 py-1 border rounded-md hover:bg-green-50 hover:text-green-600 transition"
+                    >
+                      <i className="fas fa-file-csv" /> CSV
+                    </button>
+                    <button className="flex items-center gap-1 px-3 py-1 border rounded-md hover:bg-gray-50 hover:text-gray-600 transition">
+                      <i className="fas fa-print" /> Print
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default SalaryModal;
