@@ -4,11 +4,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FaCircleXmark, FaCoins, FaFileCsv, FaFilePdf } from "react-icons/fa6";
 import { FaHandHoldingUsd } from "react-icons/fa";
 import jsPDF from "jspdf";
+import { useRef } from "react";
+import autoTable from "jspdf-autotable";
 
 const SalaryModal = () => {
   const dispatch = useDispatch();
   const { isOpen, selectedEmployee } = useSelector((state) => state.salaryModal);
   const salarySlips = useSelector((state) => state.salarySlips.salaryArr);
+  const slipRefrence = useRef()
 
    if (!isOpen || !selectedEmployee) return null;
   
@@ -37,40 +40,57 @@ const SalaryModal = () => {
   // -------------- handle download pdf -----------------
 
   const handleDownloadPDF = () => {
-      const doc = new jsPDF();
-      
-      // Header
-      doc.setFontSize(18);
-      doc.text("SALARY SLIP", 105, 20, null, null, "center");
-      
-      // Employee Info
-      doc.setFontSize(12);
-      doc.text(`Employee Name: ${selectedEmployee.employeeName}`, 20, 40);
-      doc.text(`Department: ${selectedEmployee.department}`, 20, 50);
-      doc.text(`Month/Year: ${employeeSlips[0].month} ${employeeSlips[0].year}`, 20, 60);
-  
-      // Earnings
-      doc.text("Earnings", 20, 80);
-      doc.text(`Basic Salary: $${selectedEmployee.employeeSalary}`, 30, 90);
-      doc.text(`HRA: $${selectedEmployee.hra}`, 30, 100);
-      doc.text(`DA: $${selectedEmployee.da}`, 30, 110);
-      doc.text(`TA: $${selectedEmployee.ta}`, 30, 120);
-      doc.text(`Bonus: $${selectedEmployee.bonus}`, 30, 130);
-      doc.text(`Total Earnings: $${totalEarnings}`, 20, 140);
-  
-      // Deductions
-      doc.text("Deductions", 20, 160);
-      doc.text(`PF: $${selectedEmployee.pf}`, 30, 170);
-      doc.text(`PT: $${selectedEmployee.pt}`, 30, 180);
-      doc.text(`Tax: $${selectedEmployee.tax}`, 30, 190);
-      doc.text(`Total Deductions: $${totalDeductions}`, 20, 200);
-  
-      // Net Pay
-      doc.setFontSize(14);
-      doc.text(`Net Pay: $${netSalary}`, 20, 210);
-  
-      doc.save(`${selectedEmployee.employeeName}_Salary_${employeeSlips[0].month}_${employeeSlips[0].year}.pdf`);
-    };
+  const doc = new jsPDF();
+
+  doc.setFontSize(18);
+  doc.text("SALARY SLIP", 105, 15, null, null, "center");
+
+  doc.setFontSize(12);
+  const slip = employeeSlips[0]; 
+
+  doc.text(`Employee Name: ${selectedEmployee.employeeName}`, 14, 30);
+  doc.text(`Department: ${selectedEmployee.department}`, 14, 38);
+  doc.text(`Month/Year: ${slip.month} ${slip.year}`, 14, 46);
+
+  autoTable(doc, {
+    startY: 60,
+    head: [["Earnings", "Amount ($)"]],
+    body: [
+      ["Basic Salary", selectedEmployee.employeeSalary],
+      ["HRA", selectedEmployee.hra],
+      ["DA", selectedEmployee.da],
+      ["TA", selectedEmployee.ta],
+      ["Bonus", selectedEmployee.bonus],
+      ["Total Earnings", totalEarnings.toFixed(2)],
+    ],
+    styles: { halign: 'right' },
+    headStyles: { fillColor: [40, 167, 69] }, 
+    columnStyles: {
+      0: { halign: 'left' },
+    },
+  });
+
+  autoTable(doc, {
+    startY: doc.lastAutoTable.finalY + 10,
+    head: [["Deductions", "Amount ($)"]],
+    body: [
+      ["PF", selectedEmployee.pf],
+      ["PT", selectedEmployee.pt],
+      ["Tax", selectedEmployee.tax],
+      ["Total Deductions", totalDeductions.toFixed(2)],
+    ],
+    styles: { halign: 'right' },
+    headStyles: { fillColor: [220, 53, 69] },
+    columnStyles: {
+      0: { halign: 'left' },
+    },
+  });
+
+  doc.setFontSize(14);
+  doc.text(`Net Payable Amount: $${netSalary.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 20);
+
+  doc.save(`${selectedEmployee.employeeName}_Salary_${slip.month}_${slip.year}.pdf`);
+};
   
     // -------------- handle download csv -----------------
 
@@ -144,6 +164,7 @@ const SalaryModal = () => {
             animate="visible"
             exit="hidden"
             transition={{ duration: 0.3 }}
+            ref={slipRefrence}
             className="bg-white rounded-lg max-w-7xl max-h-170 overflow-y-auto scrollbar-none relative"
           >
             {employeeSlips.length === 0 ? (
@@ -153,9 +174,13 @@ const SalaryModal = () => {
                 const { month, year } = slip;
                 return (
                   <div className="container mx-auto px-4 py-12" key={slip.id}>
-                    {/* Salary Slip Card */}
+
+                    {/* --------------- Salary Slip Card --------------- */}
+
                     <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden animate-slide-in">
-                      {/* Header */}
+
+                      {/* ---------------- Header ---------------- */}
+
                       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-white">
                         <div className="flex justify-between items-start">
                           <div>
@@ -170,10 +195,14 @@ const SalaryModal = () => {
                           </div>
                         </div>
                       </div>
-                      {/* Employee Info Section */}
+
+                      {/* --------------- Employee Info Section --------------- */}
+
                       <div className="p-6 border-b">
                         <div className="">
-                          {/* Left Column */}
+
+                          {/* ------------- Left Column ------------- */}
+
                           <div className="">
                             <div className="flex items-center gap-4 mb-6">
                               <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
@@ -187,7 +216,9 @@ const SalaryModal = () => {
                               </div>
                             </div>
                           </div>
-                          {/* Right Column */}
+
+                          {/* -------------- Right Column -------------- */}
+
                           <div className="">
                             <div className="bg-blue-50 rounded-lg p-4">
                               <h3 className="font-bold text-gray-700 mb-2 flex items-center gap-2">
@@ -216,9 +247,13 @@ const SalaryModal = () => {
                           </div>
                         </div>
                       </div>
-                      {/* Earnings/Deductions Section */}
+
+                      {/* -------------- Earnings/Deductions Section -------------- */}
+
                       <div className="grid grid-cols-1 gap-6 p-6">
-                        {/* Earnings Section */}
+
+                        {/* ------------- Earnings Section ------------- */}
+
                         <div>
                           <h3 className="text-lg font-semibold text-green-700 flex items-center gap-2 mb-4">
                             <FaCoins />
@@ -253,7 +288,9 @@ const SalaryModal = () => {
                             </div>
                           </div>
                         </div>
-                        {/* Deductions Section */}
+
+                        {/* -------------- Deductions Section -------------- */}
+
                         <div>
                           <h3 className="text-lg font-semibold text-red-600 flex items-center gap-2 mb-4">
                             <FaHandHoldingUsd />
@@ -281,7 +318,9 @@ const SalaryModal = () => {
                           </div>
                         </div>
                       </div>
-                      {/* Net Pay Section */}
+
+                      {/* ------------ Net Pay Section ------------ */}
+
                       <div className="bg-gray-50 px-6 py-4">
                         <div className="flex justify-between items-center">
                           <div>
@@ -294,7 +333,9 @@ const SalaryModal = () => {
                           </div>
                         </div>
                       </div>
-                      {/* Footer */}
+
+                      {/*  ----------------- Footer ----------------- */}
+
                       <div className="p-6 border-t">
                         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm">
                           <div>
@@ -312,7 +353,9 @@ const SalaryModal = () => {
                         </div>
                       </div>
                     </div>
-                    {/* Watermark Stamp */}
+
+                    {/* -------------- Watermark Stamp -------------- */}
+                    
                     <div className="fixed opacity-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
                       <div className="text-8xl font-bold text-gray-400">PAID</div>
                     </div>
