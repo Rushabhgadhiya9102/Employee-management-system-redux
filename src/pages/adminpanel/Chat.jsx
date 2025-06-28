@@ -9,6 +9,7 @@ import {
   FaPaperclip,
   FaPaperPlane,
   FaPhone,
+  FaSearch,
   FaSmile,
   FaVideo,
 } from "react-icons/fa";
@@ -43,10 +44,10 @@ const Chat = () => {
   );
 
   return (
-    <section className="flex gap-x-6 w-full h-full">
+    <section className="flex md:gap-x-3 lg:gap-x-6 w-full h-full">
       <AdminAside />
 
-      <div className="Dashboard-content bg-white rounded-2xl w-full h-full p-5 overflow-y-scroll">
+      <div className="Dashboard-content bg-white rounded-2xl w-full h-full p-2 md:p-3 lg:p-6 overflow-y-scroll">
         <Header />
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
@@ -55,15 +56,15 @@ const Chat = () => {
           <p className="text-gray-600">Manage and communicate with your team</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 h-full">
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-3">
           {/* ------------ employee list ---------------- */}
 
-          <div className="w-full h-full bg-gray-100 overflow-y-auto rounded-2xl">
+          <div className="w-full h-full bg-gray-100 overflow-y-scroll rounded-2xl">
             <div className="p-5 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-semibold">Team Members</h2>
                 <button className="p-2 rounded-full hover:bg-indigo-700 transition">
-                  <i className="fas fa-search" />
+                  <FaSearch />
                 </button>
               </div>
               <form className="mt-4 relative">
@@ -72,7 +73,7 @@ const Chat = () => {
                   placeholder="Search employees..."
                   className="w-full px-4 py-2 rounded-lg bg-indigo-400 placeholder-indigo-200 text-white focus:outline-none focus:ring-2 focus:ring-indigo-300"
                 />
-                <i className="fas fa-search absolute right-3 top-2.5 text-indigo-200" />
+                <FaSearch className="absolute right-3 top-2.5 text-indigo-200"/>
               </form>
             </div>
 
@@ -158,10 +159,10 @@ const Chat = () => {
 
             <div className="border-t border-gray-200 p-4 bg-white">
               <div className="flex items-center space-x-2">
-                <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition">
+                <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100 hidden lg:block transition">
                   <FaSmile />
                 </button>
-                <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition">
+                <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100 hidden lg:block transition">
                   <FaPaperclip />
                 </button>
                 <input

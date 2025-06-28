@@ -61,13 +61,13 @@ const Tasks = () => {
 
   return (
     <>
-      <section className="flex gap-x-6 w-full h-full">
+      <section className="flex md:gap-x-3 lg:gap-x-6 w-full h-full">
         <AdminAside />
 
-        <div className="Dashboard-content bg-[#f5f5fa] rounded-3xl w-full h-full p-5">
+        <div className="Dashboard-content bg-[#f5f5fa] rounded-3xl w-full h-full p-2 md:p-3 lg:p-6">
           {/* ----------------- task assign section ---------------- */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 h-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-2 md:gap-x-3 lg:gap-x-6 mb-2 md:mb-3 lg:mb-6 h-full">
             {/* ----------------- task assign form ---------------- */}
 
             <div className="task-item md:col-span-2 lg:col-span-1 bg-white rounded-3xl shadow-md p-5">

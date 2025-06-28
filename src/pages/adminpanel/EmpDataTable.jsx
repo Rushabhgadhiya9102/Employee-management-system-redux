@@ -1,14 +1,13 @@
-import React, { useMemo, useRef, useState } from 'react'
-import AdminAside from '../../components/Aside/AdminAside'
-import Header from '../../components/Header/Header'
-import DataTable from 'react-data-table-component'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { deleteUser, editUser } from '../../features/employees/employeeSlice'
-import { FaDownload, FaTrash } from 'react-icons/fa'
-import { HiMiniPencilSquare } from 'react-icons/hi2'
-import { toast } from 'react-toastify'
-
+import React, { useMemo, useRef, useState } from "react";
+import AdminAside from "../../components/Aside/AdminAside";
+import Header from "../../components/Header/Header";
+import DataTable from "react-data-table-component";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteUser, editUser } from "../../features/employees/employeeSlice";
+import { FaDownload, FaTrash } from "react-icons/fa";
+import { HiMiniPencilSquare } from "react-icons/hi2";
+import { toast } from "react-toastify";
 
 // --------------- export cvs files start ----------------
 
@@ -41,21 +40,19 @@ const Export = ({ onExport }) => (
   >
     <FaDownload />
   </button>
-  
 );
 
 // ------------------ export cvs files end ----------------
 
 const EmpDataTable = () => {
-
   // ------------- use state and selector ------------------
 
-  const [selectedRow, setSelectedRow] = useState('');
+  const [selectedRow, setSelectedRow] = useState("");
   const [textFilter, setTextFilter] = useState("");
   const employees = useSelector((state) => state.employees.employees);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-   const searchRef = useRef();
+  const searchRef = useRef();
 
   const actionsMemo = useMemo(
     () => <Export onExport={() => downloadCSV(employees)} />,
@@ -64,25 +61,25 @@ const EmpDataTable = () => {
 
   // ------------ handle delete ---------------
 
-  const handleDelete = (id) =>{
-    dispatch(deleteUser(id))
-    toast.error("Delete Successfull")
-  }
+  const handleDelete = (id) => {
+    dispatch(deleteUser(id));
+    toast.error("Delete Successfull");
+  };
 
   // ----------- handle edit ---------------
 
   const handleEdit = (id) => {
-    dispatch(editUser(id))
+    dispatch(editUser(id));
     console.log(id);
-    navigate('/Form')
-  }
-  
+    navigate("/Form");
+  };
+
   // ------------- table columns --------------
 
-const columns = [
+  const columns = [
     {
       name: "Sr.no",
-      selector: (row,index) => index + 1,
+      selector: (row, index) => index + 1,
       sortable: false,
     },
     {
@@ -134,28 +131,30 @@ const columns = [
     cells: {
       style: {
         color: "black",
-        fontSize:"14px"
+        fontSize: "14px",
       },
     },
-     rows: {
+    rows: {
       style: {
-        '&:nth-of-type(odd)': {
-          backgroundColor: '#f2f2f2',
+        "&:nth-of-type(odd)": {
+          backgroundColor: "#f2f2f2",
         },
-        '&:nth-of-type(even)': {
-          backgroundColor: 'white', 
+        "&:nth-of-type(even)": {
+          backgroundColor: "white",
         },
-        '&:hover': {
-          backgroundColor: '#ddd', 
+        "&:hover": {
+          backgroundColor: "#ddd",
         },
       },
     },
   };
 
-  // -------------- search -------------------  
+  // -------------- search -------------------
 
-  const employeeSearch = employees.filter((item) =>
-    item.employeeName?.toLowerCase()?.includes(textFilter.toLowerCase())
+  const employeeSearch = employees.filter(
+    (item) =>
+      item.employeeName?.toLowerCase()?.includes(textFilter.toLowerCase()) ||
+      item.department?.toLowerCase()?.includes(textFilter.toLowerCase())
   );
 
   return (
@@ -168,11 +167,10 @@ const columns = [
 
           <div className="grid grid-cols-1 shadow-lg bg-white p-3 rounded-3xl">
             <div className="datatable-section relative">
-                <DataTable
+              <DataTable
                 columns={columns}
-                data={employees}
+                data={employeeSearch}
                 customStyles={customStyle}
-                // title="Employee Data"
                 pagination
                 selectableRows
                 highlightOnHover
@@ -180,25 +178,26 @@ const columns = [
                 responsive
                 scrollable={true}
                 actions={actionsMemo}
-                onSelectedRowsChange={(e)=>{
-                  setSelectedRow(e.selectedRows)
+                onSelectedRowsChange={(e) => {
+                  setSelectedRow(e.selectedRows);
                 }}
               />
 
               <input
-              type="search"
-              className="position-absolute w-25 form-control top-0 end-0 mt-4 mt-lg-5 me-3"
-              placeholder="Search"
-              onChange={(e) => setTextFilter(e.target.value)}
-              value={textFilter}
-              ref={searchRef}
-            />
+                type="search"
+                className="absolute top-0 start-0 m-4 bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                placeholder="Search"
+                onChange={(e) => setTextFilter(e.target.value)}
+                value={textFilter}
+                ref={searchRef}
+              />
 
-              <button className='p-1.5 text-xl text-red-500 hover:bg-red-100 rounded-lg cursor-pointer'
-              onClick={()=>{
-                selectedRow.map((row) => handleDelete(row.id))
-                selectedRow('')
-              }}
+              <button
+                className="p-1.5 text-xl text-red-500 hover:bg-red-100 rounded-lg cursor-pointer"
+                onClick={() => {
+                  selectedRow.map((row) => handleDelete(row.id));
+                  selectedRow("");
+                }}
               >
                 <FaTrash />
               </button>
@@ -207,7 +206,7 @@ const columns = [
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default EmpDataTable
+export default EmpDataTable;

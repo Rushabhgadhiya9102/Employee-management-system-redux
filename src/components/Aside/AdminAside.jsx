@@ -57,8 +57,8 @@ const AdminAside = () => {
   return (
     <>
       <aside
-        className={`bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-xl relative duration-300 ${
-          !open ? "w-72 p-10 h-full" : "w-15 py-14 px-4 h-full"
+        className={`bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-r-xl md:rounded-xl lg:rounded-xl relative duration-300 ${
+          !open ? "w-72 p-10 h-full" : "w-10 md:w-15 lg:w-15 py-14 px-2 md:px-4 lg:px-4 h-full"
         } `}
       >
         <div className="container">
@@ -69,7 +69,7 @@ const AdminAside = () => {
 
             <button
               onClick={() => dispatch(toggleSidebar())}
-              className="p-2 absolute top-0 right-0 me-3 mt-3 text-2xl"
+              className="p-2 absolute top-0 right-0 lg:me-3 mt-3 text-xl md:text-2xl lg:text-2xl"
             >
               {!open ? <BiMenuAltRight /> : <BiMenuAltLeft />}
             </button>
@@ -85,7 +85,7 @@ const AdminAside = () => {
                     className="aside-item flex items-center space-x-5 my-5 hover:text-gray-200 text-lg"
                     key={idx}
                   >
-                    <p className="text-2xl">{icon}</p>
+                    <p className="text-xl md:text-2xl lg:text-2xl">{icon}</p>
                     <p className={open && "hidden"}>{name}</p>
                   </li>
                 </Link>
@@ -94,7 +94,7 @@ const AdminAside = () => {
 
             <Link to={"/"} className="absolute bottom-0" onClick={handleLogout}>
               <li className="aside-item flex items-center space-x-5 my-5 hover:text-gray-200 text-lg">
-                <p className="text-2xl">
+                <p className="text-xl md:text-2xl lg:text-2xl">
                   <TbLogout2 />
                 </p>
                 <p className={open && "hidden"}>Logout</p>

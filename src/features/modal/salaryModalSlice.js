@@ -9,10 +9,15 @@ const salaryModalSlice = createSlice({
     name:"salaryModal",
     initialState,
     reducers:{
+
+            // ------------ open modal ---------------
+
             openSalaryModal:(state,action) =>{
                 state.isOpen = true;
                 state.selectedEmployee = action.payload
             },
+
+            // ---------- close modal ---------------
 
             closeSalaryModal:(state) => {
                 state.isOpen = false;

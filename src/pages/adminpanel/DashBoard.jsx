@@ -130,15 +130,15 @@ const DashBaord = () => {
 
   return (
     <>
-      <article className="flex gap-x-3 w-full h-full">
+      <article className="flex md:gap-x-3 lg:gap-x-3 w-full h-full">
         <AdminAside />
 
-        <div className="Dashboard-content bg-[#f5f5fa] w-full h-full p-6 rounded-2xl overflow-y-auto scrollbar-none">
+        <div className="Dashboard-content bg-[#f5f5fa] w-full h-full p-2 md:p-3 lg:p-6 rounded-2xl overflow-y-auto scrollbar-none">
           <Header />
 
           {/* ------------------ Greeting Card ----------------- */}
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-y-2 md:gap-3 lg:gap-6 mb-2 md:mb-3 lg:mb-6">
             <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl p-6 shadow-lg col-span-2 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <h2 className="text-4xl font-bold text-white">
                 {greetings} Rushabh
@@ -173,7 +173,7 @@ const DashBaord = () => {
           </div>
 
           {/* ---------------- Main Bento Grid --------------- */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3 lg:gap-6 mb-2 md:mb-3 lg:mb-6">
             {/* ------------------- Salary Slip Generator ----------------- */}
             <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 col-span-1">
               <h2 className="text-xl font-bold mb-4 flex items-center">
@@ -325,7 +325,7 @@ const DashBaord = () => {
           </div>
 
           {/* ---------------- Bottom Row --------------- */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-y-2 md:gap-3 lg:gap-6 mb-2 md:mb-3 lg:mb-6">
             {/* -------------- All Employees List --------------- */}
             <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 col-span-2">
               <h2 className="text-xl font-bold mb-4 flex items-center">

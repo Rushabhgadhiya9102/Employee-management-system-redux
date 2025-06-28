@@ -68,15 +68,15 @@ const Form = () => {
 
   return (
     <>
-      <section className="flex gap-x-6 w-full h-full">
+      <section className="flex md:gap-x-3 lg:gap-x-6 w-full h-full">
         <AdminAside />
 
-        <div className="form-content bg-[#f5f5fa] rounded-2xl w-full h-full p-5 overflow-y-scroll scrollbar-none">
+        <div className="form-content bg-[#f5f5fa] rounded-2xl w-full h-full p-2 md:p-3 lg:p-6 overflow-y-scroll scrollbar-none">
           <Header />
 
           <div className="form-section">
             <form method="post" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 md:gap-3 lg:gap-6 mb-2 md:mb-3 lg:mb-6">
                 {/* -------------- personal information -------------- */}
 
                 <div className="form-item">
