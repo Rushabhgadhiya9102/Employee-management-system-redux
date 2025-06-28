@@ -104,6 +104,23 @@ const Form = () => {
                       </div>
                       <div>
                         <label
+                          htmlFor="email"
+                          className="block mb-1 text-sm font-medium"
+                        >
+                          Email
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={employee.email || ""}
+                          onChange={handleChange}
+                          className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                          placeholder="JohnDoe@gmail.com"
+                        />
+                      </div>
+                      <div>
+                        <label
                           htmlFor="department"
                           className="block mb-1 text-sm font-medium"
                         >

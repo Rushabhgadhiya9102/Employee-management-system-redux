@@ -4,11 +4,10 @@ import Header from "../../components/Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import {
-  FaChartLine,
   FaCrown,
   FaEye,
-  FaFileExport,
   FaPlus,
+  FaTasks,
   FaTrash,
 } from "react-icons/fa";
 import Modal from "../../components/Modal/Modal";
@@ -20,6 +19,7 @@ import {
 import { openSalaryModal } from "../../features/modal/salaryModalSlice";
 import SalaryModal from "../../components/Modal/SalaryModal";
 import { useNavigate } from "react-router-dom";
+import { FaTable } from "react-icons/fa6";
 
 const DashBaord = () => {
   // --------------- use state ------------------
@@ -39,20 +39,20 @@ const DashBaord = () => {
 
   // ------------------ employees performance ranking ----------------
 
-  // useEffect(() => {
-  //   const rankingInterval = setInterval(() => {
-  //     const employeesWithRanking = employees.map((emp) => ({
-  //       ...emp,
-  //       ranking: Math.floor(Math.random() * 100) + 1,
-  //     }));
+  useEffect(() => {
+    const rankingInterval = setInterval(() => {
+      const employeesWithRanking = employees.map((emp) => ({
+        ...emp,
+        ranking: Math.floor(Math.random() * 100) + 1,
+      }));
 
-  //     employeesWithRanking.sort((a, b) => b.ranking - a.ranking);
+      employeesWithRanking.sort((a, b) => b.ranking - a.ranking);
 
-  //     setRanking(employeesWithRanking);
-  //   }, 5000);
+      setRanking(employeesWithRanking);
+    }, 5000);
 
-  //   return () => clearInterval(rankingInterval);
-  // }, []);
+    return () => clearInterval(rankingInterval);
+  }, []);
 
   useEffect(() => {
     // ----------------- get current date and day -----------------
@@ -116,19 +116,27 @@ const DashBaord = () => {
 
   // ------------- handle navigate -----------------
 
-  const handleNavigate = ()=>{
+  const handleNavigateToForm = ()=>{
     navigate('/Form')
+  }
+
+  const handleNavigateToTable = ()=>{
+    navigate('/EmpDataTable')
+  }
+
+  const handleNavigateToTasks = ()=>{
+    navigate('/Tasks')
   }
 
   return (
     <>
-      <article className="flex gap-x-6 w-full h-full">
+      <article className="flex gap-x-3 w-full h-full">
         <AdminAside />
 
         <div className="Dashboard-content bg-[#f5f5fa] w-full h-full p-6 rounded-2xl overflow-y-auto scrollbar-none">
           <Header />
 
-          {/* Greeting Card (Top Left) */}
+          {/* ------------------ Greeting Card ----------------- */}
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl p-6 shadow-lg col-span-2 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
@@ -139,7 +147,7 @@ const DashBaord = () => {
               <p className="text-lg text-white/80">{currentDate}</p>
             </div>
 
-            {/* Quick Stats (Top Right) */}
+            {/* ------------------ Quick Stats ---------------- */}
             <div className="grid grid-cols-2 gap-3">
               <div className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-all duration-300">
                 <p className="text-sm text-gray-500">Employees</p>
@@ -152,21 +160,21 @@ const DashBaord = () => {
               <div className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-all duration-300">
                 <p className="text-sm text-gray-500">Completed</p>
                 <p className="text-2xl font-bold text-green-500">
-                  {tasks.filter((t) => t.completed).length}
+                  {tasks.filter((t) => t.isDone).length}
                 </p>
               </div>
               <div className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-all duration-300">
                 <p className="text-sm text-gray-500">Pending</p>
                 <p className="text-2xl font-bold text-amber-500">
-                  {tasks.filter((t) => !t.completed).length}
+                  {tasks.filter((t) => !t.isDone).length}
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Main Bento Grid */}
+          {/* ---------------- Main Bento Grid --------------- */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            {/* Salary Slip Generator (Left) */}
+            {/* ------------------- Salary Slip Generator ----------------- */}
             <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 col-span-1">
               <h2 className="text-xl font-bold mb-4 flex items-center">
                 <span className="w-3 h-3 bg-indigo-500 rounded-full mr-2"></span>
@@ -232,7 +240,7 @@ const DashBaord = () => {
               </form>
             </div>
 
-            {/* Salary Slip List (Middle) */}
+            {/* ---------------- Salary Slip List ---------------- */}
             <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 col-span-1">
               <h2 className="text-xl font-bold mb-4 flex items-center">
                 <span className="w-3 h-3 bg-amber-500 rounded-full mr-2"></span>
@@ -250,7 +258,7 @@ const DashBaord = () => {
                         {slip.month} {slip.year}
                       </p>
                     </div>
-                    <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex space-x-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={() => handleDeleteSalary(slip.id)}
                         className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg"
@@ -275,14 +283,14 @@ const DashBaord = () => {
               </div>
             </div>
 
-            {/* Employee Performance (Right) */}
+            {/* ----------------- Employee Performance -------------- */}
             <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 col-span-1">
               <h2 className="text-xl font-bold mb-4 flex items-center">
                 <span className="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
                 Top Performers
               </h2>
               <div className="space-y-4">
-                {ranking.slice(0, 3).map((emp, i) => (
+                {ranking.slice(0, 5).map((emp, i) => (
                   <div
                     key={i}
                     className="flex items-center p-3 hover:bg-gray-50 rounded-xl transition-colors"
@@ -316,9 +324,9 @@ const DashBaord = () => {
             </div>
           </div>
 
-          {/* Bottom Row */}
+          {/* ---------------- Bottom Row --------------- */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* All Employees List */}
+            {/* -------------- All Employees List --------------- */}
             <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 col-span-2">
               <h2 className="text-xl font-bold mb-4 flex items-center">
                 <span className="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
@@ -350,29 +358,29 @@ const DashBaord = () => {
               </div>
             </div>
 
-            {/* Quick Actions */}
+            {/* -------------------- Quick Actions ------------------- */}
             <div className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
               <h2 className="text-xl font-bold mb-4 flex items-center">
                 <span className="w-3 h-3 bg-purple-500 rounded-full mr-2"></span>
                 Quick Actions
               </h2>
               <div className="space-y-3">
-                <button onClick={handleNavigate} className="w-full flex items-center justify-between p-3 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors">
+                <button onClick={handleNavigateToForm} className="w-full flex items-center justify-between p-3 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors">
                   <span>Add New Employee</span>
                   <FaPlus />
                 </button>
-                <button className="w-full flex items-center justify-between p-3 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors">
-                  <span>Generate Report</span>
-                  <FaFileExport />
+                <button onClick={handleNavigateToTable} className="w-full flex items-center justify-between p-3 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors">
+                  <span>Employee DataTable</span>
+                  <FaTable />
                 </button>
-                <button className="w-full flex items-center justify-between p-3 bg-amber-50 text-amber-600 rounded-lg hover:bg-amber-100 transition-colors">
-                  <span>View Analytics</span>
-                  <FaChartLine />
+                <button onClick={handleNavigateToTasks} className="w-full flex items-center justify-between p-3 bg-amber-50 text-amber-600 rounded-lg hover:bg-amber-100 transition-colors">
+                  <span>Tasks</span>
+                  <FaTasks />
                 </button>
               </div>
             </div>
           </div>
-
+          {/* ------------ Modals --------------- */}
           <Modal />
           <SalaryModal />
         </div>

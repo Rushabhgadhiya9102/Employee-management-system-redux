@@ -84,8 +84,8 @@ const columns = [
       sortable: false,
     },
     {
-      name: "Employee id",
-      selector: (row) => row.id,
+      name: "Email",
+      selector: (row) => row.email,
       sortable: false,
     },
     {

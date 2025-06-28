@@ -68,15 +68,18 @@ const Tasks = () => {
           {/* ----------------- task assign section ---------------- */}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 h-full">
-            {/* Task Assignment Form */}
+            {/* ----------------- task assign form ---------------- */}
+
             <div className="task-item md:col-span-2 lg:col-span-1 bg-white rounded-3xl shadow-md p-5">
-              <h2 className="text-2xl font-bold mb-4 text-indigo-600">Task Assign</h2>
+              <h2 className="text-2xl font-bold mb-4 text-indigo-600">
+                Task Assign
+              </h2>
               <form
                 method="post"
                 className="space-y-4"
                 onSubmit={handleTaskSubmit}
               >
-                {/* Employee Select Dropdown */}
+                {/* ----------------- task name ---------------- */}
 
                 <div className="mb-4">
                   <select
@@ -97,7 +100,8 @@ const Tasks = () => {
                   </select>
                 </div>
 
-                {/* Task Title */}
+                {/* ----------------- task title ---------------- */}
+
                 <div>
                   <input
                     type="text"
@@ -109,7 +113,8 @@ const Tasks = () => {
                   />
                 </div>
 
-                {/* Task Description */}
+                {/* ----------------- task description ---------------- */}
+
                 <div>
                   <textarea
                     name="taskDescription"
@@ -121,7 +126,8 @@ const Tasks = () => {
                   />
                 </div>
 
-                {/* Task Date */}
+                {/* ----------------- task date ---------------- */}
+
                 <div>
                   <input
                     type="date"
@@ -138,9 +144,12 @@ const Tasks = () => {
               </form>
             </div>
 
-            {/* Task List */}
+            {/* ----------------- task list ---------------- */}
+
             <div className="task-item col-span-2 lg:col-span-2 bg-white rounded-3xl shadow-md p-5 max-h-full overflow-y-auto">
-              <h3 className="text-2xl font-bold mb-3 text-indigo-600">Task List</h3>
+              <h3 className="text-2xl font-bold mb-3 text-indigo-600">
+                Task List
+              </h3>
               {tasks.length === 0 ? (
                 <p className="text-gray-500">No tasks assigned yet.</p>
               ) : (
@@ -148,7 +157,9 @@ const Tasks = () => {
                   {tasks.map((task, index) => (
                     <li
                       key={index}
-                      className="bg-gray-50 p-4 rounded-3xl flex justify-between items-center group hover:bg-indigo-50 shadow-lg hover:shadow-xl transition-colors"
+                      className={`p-4 rounded-3xl flex justify-between items-center group hover:bg-indigo-50 shadow-lg hover:shadow-xl transition-colors ${
+                        task.isDone ? "bg-green-100" : "bg-red-100"
+                      }`}
                     >
                       <div>
                         <p className="font-medium text-gray-800">
@@ -163,7 +174,7 @@ const Tasks = () => {
                         <p className="text-sm text-gray-500 mb-2">
                           Due Date: {task.taskDate}
                         </p>
-                        <div className="flex justify-end space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex justify-end space-x-1 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
                           <button
                             onClick={() => handleTaskDelete(task.id)}
                             className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg"

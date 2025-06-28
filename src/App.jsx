@@ -12,7 +12,7 @@ import Tasks from './pages/adminpanel/Tasks'
 const App = () => {
   return (
     <>
-    <section className='h-screen w-full bg-gray-200 flex gap-3 md:p-3 lg:p-3'>
+    <section className='h-screen w-full bg-gray-200 md:p-3 lg:p-3'>
 
       <Routes>
         <Route path='/' element={<Login />} />

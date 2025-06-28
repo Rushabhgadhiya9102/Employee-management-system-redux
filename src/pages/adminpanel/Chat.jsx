@@ -4,7 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { addMessage } from "../../features/chats/chatSlice";
 import AdminAside from "../../components/Aside/AdminAside";
 import { IoPersonCircleOutline } from "react-icons/io5";
-import { FaEllipsisV, FaPaperclip, FaPaperPlane, FaPhone, FaSmile, FaVideo } from "react-icons/fa";
+import {
+  FaEllipsisV,
+  FaPaperclip,
+  FaPaperPlane,
+  FaPhone,
+  FaSmile,
+  FaVideo,
+} from "react-icons/fa";
 import Header from "../../components/Header/Header";
 
 const Chat = () => {
@@ -40,7 +47,7 @@ const Chat = () => {
       <AdminAside />
 
       <div className="Dashboard-content bg-white rounded-2xl w-full h-full p-5 overflow-y-scroll">
-        <Header/>
+        <Header />
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
             Employee Communication
@@ -149,29 +156,29 @@ const Chat = () => {
 
             {/* Message Input */}
 
-              <div className="border-t border-gray-200 p-4 bg-white">
-                <div className="flex items-center space-x-2">
-                  <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition">
-                    <FaSmile />
-                  </button>
-                  <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition">
-                    <FaPaperclip />
-                  </button>
-                  <input
-                    type="text"
-                    value={messageText}
-                onChange={(e) => setMessageText(e.target.value)}
-                    placeholder="Type your message..."
-                    className="flex-1 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                  />
-                  <button
-                    onClick={handleSendMessage}
-                    className="p-2 rounded-full text-white bg-indigo-600 hover:bg-indigo-700 transition"
-                  >
-                    <FaPaperPlane />
-                  </button>
-                </div>
+            <div className="border-t border-gray-200 p-4 bg-white">
+              <div className="flex items-center space-x-2">
+                <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition">
+                  <FaSmile />
+                </button>
+                <button className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition">
+                  <FaPaperclip />
+                </button>
+                <input
+                  type="text"
+                  value={messageText}
+                  onChange={(e) => setMessageText(e.target.value)}
+                  placeholder="Type your message..."
+                  className="flex-1 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                />
+                <button
+                  onClick={handleSendMessage}
+                  className="p-2 rounded-full text-white bg-indigo-600 hover:bg-indigo-700 transition"
+                >
+                  <FaPaperPlane />
+                </button>
               </div>
+            </div>
           </div>
         </div>
       </div>
