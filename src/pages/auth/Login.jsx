@@ -10,7 +10,7 @@ const Login = () => {
   // --------------- use states -----------------
 
   const [role, setRole] = useState("admin");
-  const [selectedEmail, setSelectedEmail] = useState({});
+  const [selectedEmail, setSelectedEmail] = useState('');
   const { isLoggedIn } = useSelector((state) => state.login);
   const employees = useSelector((state) => state.employees.employees);
   const dispatch = useDispatch();
@@ -27,14 +27,6 @@ const Login = () => {
       }
     }
   }, [isLoggedIn, role, selectedEmail, navigate]);
-
-  // --------------- handle change -----------------
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    const newData = { ...selectedEmail, [name]: value };
-    setSelectedEmail(newData);
-  };
 
   // -------------- handle login ----------------
 
@@ -67,8 +59,6 @@ const Login = () => {
                   type="email"
                   placeholder="Email"
                   name="loginEmail"
-                  onChange={handleChange}
-                  value={selectedEmail.loginEmail || ""}
                   className="bg-white border w-full py-1 px-3 rounded"
                 />
               </div>
@@ -96,8 +86,6 @@ const Login = () => {
                 type="password"
                 placeholder="Password"
                 name="loginPassword"
-                onChange={handleChange}
-                value={selectedEmail.loginPassword || ""}
                 className="bg-white border w-full py-1 px-3 rounded"
               />
             </div>

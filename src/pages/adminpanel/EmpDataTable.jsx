@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import AdminAside from '../../components/Aside/AdminAside'
 import Header from '../../components/Header/Header'
 import DataTable from 'react-data-table-component'
@@ -51,9 +51,11 @@ const EmpDataTable = () => {
   // ------------- use state and selector ------------------
 
   const [selectedRow, setSelectedRow] = useState('');
+  const [textFilter, setTextFilter] = useState("");
   const employees = useSelector((state) => state.employees.employees);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+   const searchRef = useRef();
 
   const actionsMemo = useMemo(
     () => <Export onExport={() => downloadCSV(employees)} />,
@@ -150,6 +152,12 @@ const columns = [
     },
   };
 
+  // -------------- search -------------------  
+
+  const employeeSearch = employees.filter((item) =>
+    item.employeeName?.toLowerCase()?.includes(textFilter.toLowerCase())
+  );
+
   return (
     <>
       <section className="flex gap-x-6 w-full h-full">
@@ -176,6 +184,15 @@ const columns = [
                   setSelectedRow(e.selectedRows)
                 }}
               />
+
+              <input
+              type="search"
+              className="position-absolute w-25 form-control top-0 end-0 mt-4 mt-lg-5 me-3"
+              placeholder="Search"
+              onChange={(e) => setTextFilter(e.target.value)}
+              value={textFilter}
+              ref={searchRef}
+            />
 
               <button className='p-1.5 text-xl text-red-500 hover:bg-red-100 rounded-lg cursor-pointer'
               onClick={()=>{

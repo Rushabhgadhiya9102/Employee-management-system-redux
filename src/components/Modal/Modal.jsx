@@ -106,7 +106,7 @@ const Modal = () => {
                           </div>
                           <div className="flex items-center mr-4 mb-2">
                             <MdBadge />
-                            <span className="ml-2">EMP ID : {employee.id}</span>
+                            <span className="ml-2">Email : {employee.email}</span>
                           </div>
                           <div className="flex items-center mb-2">
                             <i className="fas fa-calendar-alt mr-2" />
