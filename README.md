@@ -37,8 +37,11 @@ This is a React-based Employee Management System that allows administrators to m
 
 **User Panel:**
 
-*   **User Dashboard:** (Basic implementation, can be expanded)
-    *   Logout functionality.
+*   **User Dashboard**:
+    *   View assigned tasks and mark them as done.
+    *   Access and download personal salary slips.
+    *   Communicate with the admin through the chat system.
+    *   Logout functionality. 
 
 **Global Features:**
 
@@ -148,10 +151,9 @@ employee-management-system/
     *   Email: (any valid email, e.g., `admin@example.com`)
     *   Password: (any password)
     *   Select "Admin" radio button.
-*   **Employee Login:**
-    *   Email: (any valid email, e.g., `employee@example.com`)
-    *   Password: (any password)
+*   **Employee Login**:
     *   Select "Employee" radio button.
+    *   Choose an employee email from the dropdown (employees are added by the admin).
 
 ### Admin Panel
 
@@ -165,8 +167,8 @@ After logging in as an admin, you will be redirected to the Admin Dashboard.
 
 ### User Panel
 
-After logging in as an employee, you will be redirected to the User Dashboard. This is a basic page and can be expanded with more user-specific functionalities.
-
+After logging in as an employee, you will be redirected to the User Dashboard. 
+*   **User Dashboard**: View tasks assigned to you, mark them as done, access and download your salary slips, and communicate with the admin via chat.
 ## Redux State Structure
 
 The Redux store is configured with the following slices:
